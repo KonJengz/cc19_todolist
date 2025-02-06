@@ -1,9 +1,13 @@
+const createError = require("../utils/create-error");
+
 const userController = {};
 
 userController.getMe = async (req, res, next) => {
   try {
-    console.log("req.user=", req.user);
-    res.status(200).json({ user: "user" });
+    if (!req.user) {
+      return createError(400, "invalid login");
+    }
+    res.status(200).json({ user: req.user });
   } catch (error) {
     next(error);
   }

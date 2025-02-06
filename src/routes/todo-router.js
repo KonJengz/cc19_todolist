@@ -1,9 +1,11 @@
 const express = require("express");
+const todoController = require("../controllers/todo-controller");
 
 const todoRouter = express.Router();
 
-todoRouter.post("/", (req, res, next) => {});
-todoRouter.get("/", (req, res, next) => {});
+todoRouter.post("/", todoController.createTodo);
+todoRouter.get("/", todoController.getTodoByUserId);
+
 todoRouter.get("/:todoId", (req, res, next) => {});
 todoRouter.put("/:todoId", (req, res, next) => {});
 todoRouter.delete("/:todoId", (req, res, next) => {});

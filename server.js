@@ -8,6 +8,7 @@ const limiter = require("./src/utils/rate-limit");
 const authRouter = require("./src/routes/auth-router");
 const userRouter = require("./src/routes/user-router");
 const todoRouter = require("./src/routes/todo-router");
+const authenticate = require("./src/middlewares/authenticate");
 
 const app = express();
 
@@ -17,19 +18,11 @@ app.use(limiter);
 app.use(express.json());
 
 app.use("/api/v1/auth", authRouter);
-app.use("/api/v1/user", userRouter);
-app.use("/api/v1/todo", todoRouter);
-
-app.get("/a", (req, res, next) => {
-  res.json({ message: "aaaa" });
-});
-
-app.post("/b", (req, res, next) => {
-  res.json({ message: "bbb" });
-});
+app.use("/api/v1/user", authenticate, userRouter);
+app.use("/api/v1/todo", authenticate, todoRouter);
 
 app.use(notFound);
 app.use(errorMiddleware);
 
-const PORT = 8081;
+const PORT = process.env.PORT || 8081;
 app.listen(PORT, () => console.log(`server run port ${PORT}`));

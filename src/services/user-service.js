@@ -8,4 +8,11 @@ userService.findUserById = (id) => {
   });
 };
 
+userService.updateUser = (id, data) => {
+  return prisma.user.update({
+    where: { id },
+    data,
+  });
+};
+
 module.exports = userService;

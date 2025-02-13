@@ -6,8 +6,7 @@ const todoRouter = express.Router();
 todoRouter.post("/", todoController.createTodo);
 todoRouter.get("/", todoController.getTodoByUserId);
 
-todoRouter.get("/:todoId", (req, res, next) => {});
-todoRouter.put("/:todoId", (req, res, next) => {});
-todoRouter.delete("/:todoId", (req, res, next) => {});
+todoRouter.put("/:todoId", todoController.updaTodoByTodoId);
+todoRouter.delete("/:todoId", todoController.deleteTodoByTodoId);
 
 module.exports = todoRouter;

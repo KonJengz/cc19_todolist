@@ -16,6 +16,7 @@ app.use(cors());
 app.use(morgan("dev"));
 app.use(limiter);
 app.use(express.json());
+app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/user", authenticate, userRouter);

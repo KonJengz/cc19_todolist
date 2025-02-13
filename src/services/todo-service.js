@@ -30,4 +30,29 @@ todoService.getTodoByUserId = (userId) => {
   });
 };
 
+todoService.getTodoByUserIdAndId = (userId, id) => {
+  return prisma.todolist.findFirst({
+    where: {},
+  });
+};
+
+todoService.updaTodoByTodoId = (userId, id, data) => {
+  return prisma.todolist.update({
+    where: {
+      userId,
+      id: Number(id),
+    },
+    data,
+  });
+};
+
+todoService.deleteTodoByTodoId = (userId, id) => {
+  return prisma.todolist.delete({
+    where: {
+      userId,
+      id: Number(id),
+    },
+  });
+};
+
 module.exports = todoService;
